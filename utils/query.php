@@ -13,10 +13,9 @@ function query($queryString) {
             $rows[] = $row;
         }
     } else {
-        var_dump(mysqli_error($conn));
+        $error = mysqli_error($conn);
     }
     
-
     return $rows;
 }
 

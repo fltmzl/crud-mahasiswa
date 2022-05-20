@@ -92,7 +92,7 @@
                 <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
               </svg>
             </label>
-            <input class="bg-gray-100 py-2 pl-10 pr-5 rounded-lg text-sm outline-none focus:ring ring-green-200 w-72" type="text" id="search" name="search" placeholder="Nama, NIM, kelas, telepon..." />
+            <input class="w-64 py-2 pl-10 pr-5 rounded-lg text-sm outline-none border-gray-200 focus:border-primary focus:ring focus:ring-primary focus:ring-opacity-20 bg-gray-50" type="text" id="search" name="search" placeholder="Nama, NIM, kelas, telepon..." data-table="mahasiswa" />
           </div>
 
           <div class="flex justify-between">
@@ -126,13 +126,16 @@
 
                 <!-- Dropdown Items -->
                 <div class="absolute flex flex-col shadow-lg rounded-lg text-left bg-white">
-                  <button id="btn-add-mahasiswa" class="btn text-sm hover:bg-gray-100/70 transition duration-100 ease-out">
+                  <!-- Button Tambah Mahasiswa -->
+                  <button id="btnAddMahasiswa" class="btn text-sm hover:bg-gray-100/70 transition duration-100 ease-out">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                       <path stroke-linecap="round" stroke-linejoin="round" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z" />
                     </svg>
                     <span>Mahasiswa</span> 
                   </button>
-                  <button id="btn-add-dosen" class="btn text-sm hover:bg-gray-100/70 transition duration-100 ease-out">
+
+                  <!-- Button Tambah Dosen -->
+                  <button id="btnAddDosen" class="btn text-sm hover:bg-gray-100/70 transition duration-100 ease-out">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                       <path stroke-linecap="round" stroke-linejoin="round" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z" />
                     </svg>
@@ -151,7 +154,7 @@
             <a class="px-3 pb-3" href="#" id="dosenTabButton">Dosen</a>
           </div>
 
-          <div class="mt-5 basis-full h-full overflow-hidden overflow-y-auto scroll-hide">
+          <div class="mt-5 basis-full h-full overflow-hidden overflow-y-auto">
             <table id="tableContainer" class="w-full text-left table-auto max-h-4">
               <thead id="headerTableContainer" class="table-container text-sm">
                 <tr>
@@ -210,7 +213,17 @@
       </aside>
     </div>
 
+
+    <!-- Form Tambah Mahasiswa -->
+    <!-- <div id="formTambahMahasiswaContainer" class="absolute inset-0 bg-gray-400/20">
+      <form action="">
+        <div>
+          <label for="nama">Nama</label>
+          <input type="text" name="nama" id="nama" placeholder="Nama Lengkap">
+        </div>
+      </form>
+    </div> -->
     <!-- JS -->
-    <!-- <script src="public/js/ajax.js"></script> -->
+    <script src="public/js/ajax.js"></script>
   </body>
 </html>

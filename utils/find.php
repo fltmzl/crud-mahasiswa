@@ -9,10 +9,10 @@ function find($keyword, $table) {
                         nim LIKE '%$keyword%' OR
                         kelas LIKE '%$keyword%' OR
                         telepon LIKE '%$keyword%'";    
-    } else {
+    } else if ($table == "dosen") {
         $queryString = "SELECT * FROM $table WHERE
                         nama LIKE '%$keyword%' OR
-                        nidn LIKE %$keyword% OR
+                        nidn LIKE '%$keyword%' OR
                         telepon LIKE '%$keyword%'";
     }
    

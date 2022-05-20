@@ -101,7 +101,7 @@ $totalDosen = mysqli_query($conn, "SELECT nama FROM dosen")->num_rows;
                 <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
               </svg>
             </label>
-            <input class="bg-gray-100 py-2 pl-10 pr-5 rounded-lg text-sm outline-none focus:ring ring-green-200 w-72" type="text" id="search" name="search" placeholder="Nama, NIM, kelas, telepon..." />
+            <input class="w-64 py-2 pl-10 pr-5 rounded-lg text-sm outline-none border-gray-200 focus:border-primary focus:ring focus:ring-primary focus:ring-opacity-20 bg-gray-50" type="text" id="search" name="search" placeholder="Nama, NIM, kelas, telepon..." data-table="mahasiswa" />
           </div>
 
           <div class="flex justify-between">
@@ -134,7 +134,7 @@ $totalDosen = mysqli_query($conn, "SELECT nama FROM dosen")->num_rows;
             <a class="px-3 pb-3" href="#" id="dosenTabButton">Dosen</a>
           </div>
 
-          <div class="mt-5 basis-full h-full overflow-hidden overflow-y-auto scroll-hide">
+          <div class="mt-5 basis-full h-full overflow-hidden overflow-y-auto">
             <table id="tableContainer" class="w-full text-left table-auto max-h-4">
               <thead id="headerTableContainer" class="table-container text-sm">
                 <tr>
