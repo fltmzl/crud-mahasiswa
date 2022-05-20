@@ -5,3 +5,6 @@
 /.pnp
 .pnp.js
 /vendor
+
+package-lock.json
+package.json
