@@ -11,13 +11,13 @@ class App {
 
         // Set Controller
         if($url != null) {
-            if(file_exists("../app/controllers/$url[0].php")) {
+            if(file_exists(APP_PATH . "controllers/$url[0].php")) {
                 $this->controller = $url[0];
                 unset($url[0]);
             }
         }
         
-        require_once "../app/controllers/$this->controller.php";
+        require_once APP_PATH . "controllers/$this->controller.php";
         $this->controller = new $this->controller;
         
         // Set Method
