@@ -1,11 +1,6 @@
 <?php 
 
-require_once "../utils/find.php";
-
-// $dosen = query("SELECT * FROM dosen");
-isset($_GET["keyword"]) ? $keyword = $_GET["keyword"] : $keyword = "";
-
-$dosen = find($keyword, "dosen");
+$dosen = $data["dosen"];
 
 ?>
 

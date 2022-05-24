@@ -1,12 +1,6 @@
 <?php 
 
-require_once "../utils/findOne.php";
-require_once "../utils/getAge.php";
-
-$table = $_GET["table"];
-$id = $_GET["detailData"];
-
-$data = findOne($table, $id);
+$data = $data["data"]
 
 ?>
 
@@ -36,7 +30,7 @@ $data = findOne($table, $id);
     <!-- Profile Name -->
     <div>
         <h4 class="font-semibold"><?=$data["nama"] ?></h4>
-        <h6 class="capitalize"><?= $table ?></h6>
+        <h6 class="capitalize"><?= $data["role"] ?></h6>
     </div>
 
     <!-- Profile Contact -->
@@ -80,7 +74,7 @@ $data = findOne($table, $id);
     </div>
     <div class="space-y-2">
         <h5>Umur</h5>
-        <?php $age = getAge($data["tanggal_lahir"]) ?>
+        <?php $age = $data["tanggal_lahir"] ?>
         <h6><?=$age ?></h6>
     </div>
     <div class="space-y-2">

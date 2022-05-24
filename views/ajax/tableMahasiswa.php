@@ -1,12 +1,9 @@
 <?php 
 
-require_once "../utils/find.php";
-
-isset($_GET["keyword"]) ? $keyword = $_GET["keyword"] : $keyword = "";
-
-$mahasiswa = find($keyword, "mahasiswa");
+$mahasiswa = $data["mahasiswa"];
 
 ?>
+
 
 <?php if(count($mahasiswa)) :?>
     <thead id="headerTableContainer" class="table-container text-sm">
@@ -14,7 +11,7 @@ $mahasiswa = find($keyword, "mahasiswa");
             <th>No</th>
             <th>Nama</th>
             <th>NIM</th>
-            <th>Kelas</th>
+            <th>kelas</th>
             <th>Telepon</th>
         </tr>
     </thead>
