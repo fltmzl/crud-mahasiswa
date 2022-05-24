@@ -1,0 +1,13 @@
+{
+    "name": "rizki/uas-pemrograman-web",
+    "description": "Project UAS Pemrograman Web 2",
+    "authors": [
+        {
+            "name": "Rizzle",
+            "email": "fltmzl2810@gmail.com"
+        }
+    ],
+    "require": {
+        "vlucas/phpdotenv": "^5.4"
+    }
+}

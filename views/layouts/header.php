@@ -35,13 +35,13 @@
         </div>
 
         <section class="flex flex-col mt-16 space-y-5 text-gray-500 font-medium text-sm">
-          <a href="database.php" class="px-5 py-2 flex items-center space-x-3">
+          <a href="<?= APP_URL ?>/database" class="nav--link px-5 py-2 flex items-center space-x-3" data-navbar="database">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
               <path stroke-linecap="round" stroke-linejoin="round" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
             </svg>
             <span> Database </span>
           </a>
-          <a href="/" class="px-5 py-2 flex items-center space-x-3 navbar-active">
+          <a href="<?= APP_URL ?>/" class="nav--link px-5 py-2 flex items-center space-x-3" data-navbar="dashboard">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
               <path
                 stroke-linecap="round"
@@ -51,13 +51,13 @@
             </svg>
             <span> Dashboard </span>
           </a>
-          <a href="#" class="px-5 py-2 flex items-center space-x-3">
+          <a href="<?= APP_URL ?>/calendar" class="nav--link px-5 py-2 flex items-center space-x-3" data-navbar="calendar">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
               <path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
             </svg>
             <span> Calendar </span>
           </a>
-          <a href="#" class="px-5 py-2 flex items-center space-x-3">
+          <a href="<?= APP_URL ?>/attendance" class="nav--link px-5 py-2 flex items-center space-x-3" data-navbar="attendance">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
               <path
                 stroke-linecap="round"
@@ -67,7 +67,7 @@
             </svg>
             <span> Attendance </span>
           </a>
-          <a href="#" class="px-5 py-2 flex items-center space-x-3">
+          <a href="<?= APP_URL ?>/setting" class="nav--link px-5 py-2 flex items-center space-x-3" data-navbar="setting">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
               <path
                 stroke-linecap="round"

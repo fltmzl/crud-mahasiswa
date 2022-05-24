@@ -1,14 +1,17 @@
 <?php 
 
+namespace Core;
+
 class App {
+    protected $namespace = "\\Controllers";
     protected $controller = "Dashboard";
     protected $method = "index";
     protected $params = [];
-
+    
     public function __construct()
     {
         $url = $this->parseURL();
-
+        
         // Set Controller
         if($url != null) {
             if(file_exists(APP_PATH . "controllers/$url[0].php")) {
@@ -18,7 +21,8 @@ class App {
         }
         
         require_once APP_PATH . "controllers/$this->controller.php";
-        $this->controller = new $this->controller;
+        $classWithNamespace = "$this->namespace\\$this->controller";
+        $this->controller = new $classWithNamespace;
         
         // Set Method
         if(isset($url[1])) {
@@ -37,7 +41,8 @@ class App {
         call_user_func_array([$this->controller, $this->method], $this->params);
     }
 
-    public function parseURL() {
+    public function parseURL()
+    {
         if(isset($_GET["url"])) {
             $url = rtrim($_GET["url"], "/");
             $url = filter_var($url, FILTER_SANITIZE_URL);
