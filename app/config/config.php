@@ -1,12 +1,12 @@
 <?php 
 
-use Dotenv\Dotenv;
-require_once "../vendor/autoload.php";
+define("APP_PATH", "../app/");
 
-define("APP_PATH", "../");
+require_once APP_PATH . "vendor/autoload.php";
+use Dotenv\Dotenv;
 
 // get .env
-$dotenv = Dotenv::createImmutable("../");
+$dotenv = Dotenv::createImmutable(APP_PATH);
 $dotenv->load();
 
 // App config
