@@ -25,6 +25,7 @@ class Ajax extends Controller {
         $table = ucwords($table);
         $data = $this->model($table . "Model")->getOne($id);
         $data["role"] = $table;
+        $data["table"] = strtolower($table); 
 
         $this->view("ajax/detailProfile",[
             "data" => $data,

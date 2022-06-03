@@ -72,9 +72,9 @@ mahasiswaTabButton.addEventListener("click", () => {
 
 // Detail Profile Mahasiswa & Dosen
 const profileDetailContainer = document.getElementById("profileDetailContainer");
-const detailProfile = (e) => {
-  const id = e.dataset.detail;
-  const table = e.dataset.table;
+const detailProfile = ({ dataset }) => {
+  const id = dataset.detail;
+  const table = dataset.table;
 
   const loadingElement = `<svg role="status" class="inline w-10 h-10 mr-2 text-gray-200 animate-spin fill-primary" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
     <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="currentColor"/>
@@ -103,17 +103,40 @@ searchbar.addEventListener("input", () => {
   }
 });
 
-// Tambah Mahasiswa
+// Tampilkan Form Tambah Mahasiswa
 const btnAddMahasiswa = document.getElementById("btnAddMahasiswa");
-btnAddMahasiswa.addEventListener("click", () => {
-  let xhr = new XMLHttpRequest();
+const dialogBackdrop = document.getElementById("dialogBackdrop");
 
-  xhr.onreadystatechange = () => {
-    if (xhr.readyState == 4 && xhr.status == 200) {
-      document.body.innerHTML = xhr.responseText;
-    }
-  };
+if (btnAddMahasiswa) {
+  btnAddMahasiswa.addEventListener("click", () => {
+    dialogBackdrop.classList.remove("invisible");
 
-  xhr.open("GET", "ajax/formTambahMahasiswa.php");
-  xhr.send();
-});
+    const ajax = new Ajax(dialogBackdrop);
+    ajax.open("GET", `${APP_URL}/database/create/mahasiswa`);
+    ajax.send();
+  });
+}
+
+// Tampilkan Form Tambah Dosen
+const btnAddDosen = document.getElementById("btnAddDosen");
+
+if (btnAddDosen) {
+  btnAddDosen.addEventListener("click", () => {
+    dialogBackdrop.classList.remove("invisible");
+
+    const ajax = new Ajax(dialogBackdrop);
+    ajax.open("GET", `${APP_URL}/database/create/dosen`);
+    ajax.send();
+  });
+}
+
+// Tampilkan Form Edit Mahasiswa
+const editData = ({ dataset }) => {
+  const id = dataset.id;
+  const table = dataset.table;
+  dialogBackdrop.classList.remove("invisible");
+
+  const ajax = new Ajax(dialogBackdrop);
+  ajax.open("GET", `${APP_URL}/database/edit/${table}/${id}`);
+  ajax.send();
+};

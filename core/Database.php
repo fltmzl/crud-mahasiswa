@@ -52,7 +52,7 @@ class Database {
         $this->stmt->bindValue($params, $value, $type);
     }
 
-    private function execute()
+    public function execute()
     {
         $this->stmt->execute();
     }

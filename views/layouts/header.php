@@ -35,13 +35,7 @@
         </div>
 
         <section class="flex flex-col mt-16 space-y-5 text-gray-500 font-medium text-sm">
-          <a href="<?= APP_URL ?>/database" class="nav--link px-5 py-2 flex items-center space-x-3" data-navbar="database">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
-            </svg>
-            <span> Database </span>
-          </a>
-          <a href="<?= APP_URL ?>/" class="nav--link px-5 py-2 flex items-center space-x-3" data-navbar="dashboard">
+          <a href="<?= APP_URL ?>/" class="nav--link px-5 py-2 flex items-center space-x-3 navbar-active" data-navbar="dashboard">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
               <path
                 stroke-linecap="round"
@@ -50,6 +44,12 @@
               />
             </svg>
             <span> Dashboard </span>
+          </a>
+          <a href="<?= APP_URL ?>/database" class="nav--link px-5 py-2 flex items-center space-x-3" data-navbar="database">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
+            </svg>
+            <span> Database </span>
           </a>
           <a href="<?= APP_URL ?>/calendar" class="nav--link px-5 py-2 flex items-center space-x-3" data-navbar="calendar">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">

@@ -4,7 +4,6 @@ $mahasiswa = $data["mahasiswa"];
 
 ?>
 
-
 <?php if(count($mahasiswa)) :?>
     <thead id="headerTableContainer" class="table-container text-sm">
         <tr>
@@ -18,7 +17,7 @@ $mahasiswa = $data["mahasiswa"];
     <tbody id="mainTableContainer" class="table-container table-color-range text-sm">
         <?php $num = 1; ?>
         <?php foreach($mahasiswa as $mhs) :?>
-        <tr class="table-body-row" data-table="mahasiswa" data-detail=<?=$mhs["nim"] ?> onclick="detailProfile(this)">
+        <tr class="table-body-row" data-table="mahasiswa" data-detail=<?=$mhs["id"] ?> onclick="detailProfile(this)">
             <td><?= $num++ ?></td>
             <td><?= $mhs["nama"] ?></td>
             <td><?= $mhs["nim"] ?></td>

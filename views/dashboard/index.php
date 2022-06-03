@@ -1,10 +1,11 @@
-<?php 
+<?php
+
+use Core\Flasher;
 
 $totalMahasiswa = $data["totalMahasiswa"];
 $totalDosen = $data["totalDosen"];
 
 ?>
-
 
 <!-- Main Section -->
 <main class="py-5 px-6 flex flex-col flex-1 h-screen">
@@ -53,8 +54,8 @@ $totalDosen = $data["totalDosen"];
     <section class="mt-8 overflow-hidden flex flex-col flex-1">
         <!-- Table Tabs -->
         <div class="text-sm border-b pb-3 text-gray-500">
-            <a class="px-3 pb-3" href="#" id="mahasiswaTabButton">Mahasiswa</a>
-            <a class="px-3 pb-3" href="#" id="dosenTabButton">Dosen</a>
+            <a class="px-3 pb-3 cursor-pointer database-tab-active" id="mahasiswaTabButton">Mahasiswa</a>
+            <a class="px-3 pb-3 cursor-pointer" id="dosenTabButton">Dosen</a>
         </div>
 
         <div class="mt-5 basis-full h-full overflow-hidden overflow-y-auto">

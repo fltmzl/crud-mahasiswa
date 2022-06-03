@@ -17,7 +17,7 @@ $dosen = $data["dosen"];
     <tbody id="mainTableContainer" class="table-container table-color-range text-sm">
         <?php $num = 1; ?>
         <?php foreach($dosen as $dsn) :?>
-        <tr class="table-body-row" data-table="dosen" data-detail=<?=$dsn["nidn"] ?> onclick="detailProfile(this)">
+        <tr class="table-body-row" data-table="dosen" data-detail=<?=$dsn["id"] ?> onclick="detailProfile(this)">
             <td><?= $num++ ?></td>
             <td><?= $dsn["nama"] ?></td>
             <td><?= $dsn["nidn"] ?></td>
