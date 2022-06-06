@@ -14,7 +14,7 @@
               </svg>
             </span>
 
-            <div class="absolute -bottom-12 shadow-lg rounded-lg bg-white invisible js--dropdown-item">
+            <div class="absolute -bottom-12 shadow-lg rounded-lg bg-white z-10 invisible js--dropdown-item">
               <div class="flex items-center">
                 <a href="<?= APP_URL ?>/logout" class="py-3 px-5">Logout</a>
                 <span>
@@ -38,9 +38,10 @@
         </div>
       </aside>
     </div>
-
+    
     <!-- JS -->
     <script src="js/ajax.js"></script>
     <script src="js/script.js"></script>
+    <script src="js/calendar.js"></script>
   </body>
 </html>

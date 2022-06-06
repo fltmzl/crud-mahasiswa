@@ -10,8 +10,11 @@ $dosen = $data["dosen"];
             <th>No</th>
             <th>Nama</th>
             <th>NIDN</th>
-            <th>Email</th>
-            <th>Telepon</th>
+            <th class="js--teleponColumn">Telepon</th>
+            <th class="js--emailColumn hidden">Email</th>
+            <th class="js--alamatColumn hidden">Alamat</th>
+            <th class="js--jenisKelaminColumn hidden">Jenis Kelamin</th>
+            <th class="js--tanggalLahirColumn hidden">Tanggal Lahir</th>
         </tr>
     </thead>
     <tbody id="mainTableContainer" class="table-container table-color-range text-sm">
@@ -21,8 +24,11 @@ $dosen = $data["dosen"];
             <td><?= $num++ ?></td>
             <td><?= $dsn["nama"] ?></td>
             <td><?= $dsn["nidn"] ?></td>
-            <td><?= $dsn["email"] ?></td>
-            <td><?= $dsn["telepon"] ?></td>
+            <td class="js--teleponColumn"><?= $dsn["telepon"] ?></td>
+            <td class="js--emailColumn hidden"><?= $dsn["email"] ?></td>
+            <td class="js--alamatColumn hidden"><?= $dsn["alamat"] ?></td>
+            <td class="js--jenisKelaminColumn hidden"><?= $dsn["jenis_kelamin"] ?></td>
+            <td class="js--tanggalLahirColumn hidden"><?= $dsn["tanggal_lahir"] ?></td>
         </tr>
         <?php endforeach ?>
     </tbody>

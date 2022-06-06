@@ -2,7 +2,8 @@
 
 namespace Models;
 
-use \Core\Database;
+use Core\Database;
+use Core\Flasher;
 use PDO;
 
 class MahasiswaModel extends Database {
@@ -39,21 +40,26 @@ class MahasiswaModel extends Database {
 
     public function store($data)
     {
-        $nama = $data["nama"];
-        $nim = $data["nim"];
-        $kelas = $data["kelas"];
-        $tanggalLahir = $data["tanggalLahir"];
-        $email = $data["email"];
-        $telepon = $data["telepon"];
-        $jenisKelamin = $data["jenisKelamin"];
-        $alamat = $data["alamat"];
+        $post = $data["post"]; // from $_POST
+        $files = $data["files"]; // from $_FILES
 
+        $nama = $post["nama"];
+        $nim = $post["nim"];
+        $kelas = $post["kelas"];
+        $tanggalLahir = $post["tanggalLahir"];
+        $email = $post["email"];
+        $telepon = $post["telepon"];
+        $jenisKelamin = $post["jenisKelamin"];
+        $alamat = $post["alamat"];
+        $photo = $this->uploadFiles($files);
+        
         $this->query("INSERT INTO mahasiswa
-                     (nim, nama, kelas, tanggal_lahir, email, telepon, jenis_kelamin, alamat)
-                      VALUES (:nim, :nama, :kelas, :tanggalLahir, :email, :telepon, :jenisKelamin, :alamat)");
+                     (nim, nama, photo, kelas, tanggal_lahir, email, telepon, jenis_kelamin, alamat)
+                      VALUES (:nim, :nama, :photo, :kelas, :tanggalLahir, :email, :telepon, :jenisKelamin, :alamat)");
                         
         $this->bind(":nim", $nim, PDO::PARAM_STR);
         $this->bind(":nama", $nama, PDO::PARAM_STR);
+        $this->bind(":photo", $photo, PDO::PARAM_STR);
         $this->bind(":kelas", $kelas, PDO::PARAM_STR);
         $this->bind(":tanggalLahir", $tanggalLahir, PDO::PARAM_STR);
         $this->bind(":email", $email, PDO::PARAM_STR);
@@ -66,19 +72,27 @@ class MahasiswaModel extends Database {
 
     public function update($data)
     {
-        $id = $data["id"];
-        $nama = $data["nama"];
-        $nim = $data["nim"];
-        $kelas = $data["kelas"];
-        $tanggalLahir = $data["tanggalLahir"];
-        $email = $data["email"];
-        $telepon = $data["telepon"];
-        $jenisKelamin = $data["jenisKelamin"];
-        $alamat = $data["alamat"];
+        $post = $data["post"];
+        $files = $data["files"];
+
+        $id = $post["id"];
+        $nama = $post["nama"];
+        $nim = $post["nim"];
+        $kelas = $post["kelas"];
+        $tanggalLahir = $post["tanggalLahir"];
+        $email = $post["email"];
+        $telepon = $post["telepon"];
+        $jenisKelamin = $post["jenisKelamin"];
+        $alamat = $post["alamat"];
+        $oldPhoto = $post["oldPhoto"];
+        $photo = $this->uploadFiles($files);
+
+        if(!$photo) $photo = $oldPhoto;
 
         $this->query("UPDATE mahasiswa
                      SET nim=:nim,
-                         nama=:nama, 
+                         nama=:nama,
+                         photo=:photo, 
                          kelas=:kelas, 
                          tanggal_lahir=:tanggalLahir, 
                          email=:email, 
@@ -90,6 +104,7 @@ class MahasiswaModel extends Database {
         $this->bind(":id", $id, PDO::PARAM_STR);
         $this->bind(":nim", $nim, PDO::PARAM_STR);
         $this->bind(":nama", $nama, PDO::PARAM_STR);
+        $this->bind(":photo", $photo, PDO::PARAM_STR);
         $this->bind(":kelas", $kelas, PDO::PARAM_STR);
         $this->bind(":tanggalLahir", $tanggalLahir, PDO::PARAM_STR);
         $this->bind(":email", $email, PDO::PARAM_STR);

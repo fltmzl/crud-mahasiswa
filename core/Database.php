@@ -52,6 +52,26 @@ class Database {
         $this->stmt->bindValue($params, $value, $type);
     }
 
+    public function uploadFiles($data)
+    {
+        $fileError = $data["photo"]["error"];
+        if($fileError === 4) return null;
+
+        $fileSize = $data["photo"]["size"];
+        $fileType = $data["photo"]["type"];
+        $fileName = $data["photo"]["name"];
+        $arrayOfFileName = explode(".", $fileName);
+
+        $photoFileType = explode("/", $fileType)[0]; // file type, expected "image"
+        $photoFileExtension = end($arrayOfFileName); // file extension, expected "jpg,png,jpeg,etc"
+        $photoRandomFileName = uniqid() . ".$photoFileExtension"; // new random filename
+        $photoTempName = $data["photo"]["tmp_name"];
+        
+        move_uploaded_file($photoTempName, "img/$photoRandomFileName");
+
+        return $photoRandomFileName;
+    }
+
     public function execute()
     {
         $this->stmt->execute();

@@ -41,7 +41,7 @@ class Ajax {
 const mahasiswaTabButton = document.getElementById("mahasiswaTabButton");
 const dosenTabButton = document.getElementById("dosenTabButton");
 window.addEventListener("load", () => {
-  mahasiswaTabButton.classList.add("database-tab-active");
+  if (mahasiswaTabButton) mahasiswaTabButton.classList.add("database-tab-active");
 
   const ajax = new Ajax(tableContainer);
   ajax.open("GET", `${APP_URL}/ajax/showTableMahasiswa`);
@@ -49,26 +49,30 @@ window.addEventListener("load", () => {
 });
 
 // Tampikan data Dosen
-dosenTabButton.addEventListener("click", () => {
-  mahasiswaTabButton.classList.remove("database-tab-active");
-  dosenTabButton.classList.add("database-tab-active");
-  searchbar.dataset.table = "dosen";
+if (dosenTabButton) {
+  dosenTabButton.addEventListener("click", () => {
+    mahasiswaTabButton.classList.remove("database-tab-active");
+    dosenTabButton.classList.add("database-tab-active");
+    searchbar.dataset.table = "dosen";
 
-  const ajax = new Ajax(tableContainer);
-  ajax.open("GET", `${APP_URL}/ajax/showTableDosen`);
-  ajax.send();
-});
+    const ajax = new Ajax(tableContainer);
+    ajax.open("GET", `${APP_URL}/ajax/showTableDosen`);
+    ajax.send();
+  });
+}
 
 // Tampikan data Mahasiswa
-mahasiswaTabButton.addEventListener("click", () => {
-  mahasiswaTabButton.classList.add("database-tab-active");
-  dosenTabButton.classList.remove("database-tab-active");
-  searchbar.dataset.table = "mahasiswa";
+if (mahasiswaTabButton) {
+  mahasiswaTabButton.addEventListener("click", () => {
+    mahasiswaTabButton.classList.add("database-tab-active");
+    dosenTabButton.classList.remove("database-tab-active");
+    searchbar.dataset.table = "mahasiswa";
 
-  const ajax = new Ajax(tableContainer);
-  ajax.open("GET", `${APP_URL}/ajax/showTableMahasiswa`);
-  ajax.send();
-});
+    const ajax = new Ajax(tableContainer);
+    ajax.open("GET", `${APP_URL}/ajax/showTableMahasiswa`);
+    ajax.send();
+  });
+}
 
 // Detail Profile Mahasiswa & Dosen
 const profileDetailContainer = document.getElementById("profileDetailContainer");
@@ -87,50 +91,58 @@ const detailProfile = ({ dataset }) => {
 };
 
 // Cari Data Mahasiswa & Dosen
-searchbar.addEventListener("input", () => {
-  let keyword = searchbar.value;
-  let table = searchbar.dataset.table;
+if (searchbar) {
+  searchbar.addEventListener("input", () => {
+    let keyword = searchbar.value;
+    let table = searchbar.dataset.table;
 
-  const ajax = new Ajax(tableContainer);
+    const ajax = new Ajax(tableContainer);
 
-  if (keyword) {
-    ajax.open("POST", `${APP_URL}/ajax/search`);
-    ajax.contentType("application/x-www-form-urlencoded");
-    ajax.send(`table=${table}&keyword=${keyword}`);
-  } else {
-    ajax.open("GET", `${APP_URL}/ajax/showTable${capitalizeFirstLetter(table)}`);
-    ajax.send();
-  }
-});
+    if (keyword) {
+      ajax.open("POST", `${APP_URL}/ajax/search`);
+      ajax.contentType("application/x-www-form-urlencoded");
+      ajax.send(`table=${table}&keyword=${keyword}`);
+    } else {
+      ajax.open("GET", `${APP_URL}/ajax/showTable${capitalizeFirstLetter(table)}`);
+      ajax.send();
+    }
+  });
+}
 
 // Tampilkan Form Tambah Mahasiswa
 const btnAddMahasiswa = document.getElementById("btnAddMahasiswa");
 const dialogBackdrop = document.getElementById("dialogBackdrop");
 
-if (btnAddMahasiswa) {
-  btnAddMahasiswa.addEventListener("click", () => {
-    dialogBackdrop.classList.remove("invisible");
+const addMahasiswa = () => {
+  dialogBackdrop.classList.remove("invisible");
 
-    const ajax = new Ajax(dialogBackdrop);
-    ajax.open("GET", `${APP_URL}/database/create/mahasiswa`);
-    ajax.send();
-  });
-}
+  const ajax = new Ajax(dialogBackdrop);
+  ajax.open("GET", `${APP_URL}/database/create/mahasiswa`);
+  ajax.send();
+};
+
+if (btnAddMahasiswa) btnAddMahasiswa.addEventListener("click", addMahasiswa);
 
 // Tampilkan Form Tambah Dosen
 const btnAddDosen = document.getElementById("btnAddDosen");
 
-if (btnAddDosen) {
-  btnAddDosen.addEventListener("click", () => {
-    dialogBackdrop.classList.remove("invisible");
+const addDosen = () => {
+  dialogBackdrop.classList.remove("invisible");
 
-    const ajax = new Ajax(dialogBackdrop);
-    ajax.open("GET", `${APP_URL}/database/create/dosen`);
-    ajax.send();
-  });
+  const ajax = new Ajax(dialogBackdrop);
+  ajax.open("GET", `${APP_URL}/database/create/dosen`);
+  ajax.send();
+};
+
+if (btnAddDosen) btnAddDosen.addEventListener("click", addDosen);
+
+// Tampilkan form Mahasiswa / Dosen saat ada Validasi Error
+if (dialogBackdrop.classList.contains("js--force-open")) {
+  if (dialogBackdrop.dataset.table === "mahasiswa") addMahasiswa();
+  if (dialogBackdrop.dataset.table === "dosen") addDosen();
 }
 
-// Tampilkan Form Edit Mahasiswa
+// Tampilkan Form Edit (Mahasiswa / Dosen)
 const editData = ({ dataset }) => {
   const id = dataset.id;
   const table = dataset.table;

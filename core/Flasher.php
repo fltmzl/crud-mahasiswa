@@ -15,9 +15,13 @@ class Flasher {
     public static function flash()
     {
         if(isset($_SESSION["flash"])) {
+            $flash = $_SESSION["flash"];
+
             echo "
-                <h2>Test session " . $_SESSION["flash"]["message"] . "</h2>"
+                <p class='text-red-600'>" . $flash["message"] . " " . $flash["action"] . "</p>"
             ;
+
+            unset($_SESSION["flash"]);
         }
     }
 }

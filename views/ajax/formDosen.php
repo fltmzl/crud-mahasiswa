@@ -14,15 +14,16 @@ $email = $dosen["email"] ?? "";
 $telepon = $dosen["telepon"] ?? "";
 $jenisKelamin = $dosen["jenis_kelamin"] ?? "";
 $alamat = $dosen["alamat"] ?? "";
+$photo = $dosen["photo"] ?? "pp.jpg";
 
 ?>
 
 
-<div id="dialogBox" class="w-3/4 max-w-5xl px-6 py-4 rounded-lg bg-gray-50">
+<div id="dialogBox" class="w-3/4 max-w-xl h-[90vh] px-6 py-4 overflow-auto rounded-lg bg-gray-50">
     <h2 class="text-center mb-5">
         <?= $title ?>
     </h2>
-    <form action="<?= $formAction ?>" method="POST" class="grid grid-cols-2 gap-6 text-sm">
+    <form action="<?= $formAction ?>" method="POST" enctype="multipart/form-data" class="space-y-6 text-sm">
         <div>
             <label class="block mb-1" for="nama">Nama</label>
             <input class="custom-form-input" type="text" name="nama" id="nama" placeholder="Nama Lengkap" value="<?= $nama ?>" required />
@@ -57,12 +58,18 @@ $alamat = $dosen["alamat"] ?? "";
             </label>
         </div>
         <div class="col-span-full">
+            <label class="block mb-1" for="photo">Foto Profil</label>
+            <img src="img/<?= $photo ?>" alt="profile-photo" width="150" class="rounded-full my-10">
+            <input class="custom-form-input resize-none" type="file" name="photo" id="photo"/>
+        </div>
+        <div class="col-span-full">
             <label class="block mb-1" for="alamat">Alamat</label>
             <textarea class="custom-form-input resize-none" name="alamat" id="alamat" cols="30" rows="3" required ><?= $alamat ?></textarea>
         </div>
 
         <?php if($dosen) : ?>
             <input type="text" name="id" value="<?= $id ?>" hidden>
+            <input type="text" name="oldPhoto" value="<?= $photo ?>" hidden>
         <?php endif ?>
         
         <div class="col-span-full flex justify-end space-x-5">

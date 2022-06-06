@@ -23,8 +23,13 @@ class Database extends Controller {
 
     public function store($table)
     {   
+        $data = [
+            "post" => $_POST,
+            "files" => $_FILES
+        ];
+
         $table = ucwords($table);
-        $result = $this->model($table . "Model")->store($_POST);
+        $result = $this->model($table . "Model")->store($data);
         
         header("location: ". APP_URL . "/database");
     }
@@ -50,8 +55,13 @@ class Database extends Controller {
 
     public function update($table)
     {
+        $data = [
+            "post" => $_POST,
+            "files" => $_FILES
+        ];
+
         $table = ucwords($table);
-        $result = $this->model($table . "Model")->update($_POST);
+        $result = $this->model($table . "Model")->update($data);
         
         header("location: " . APP_URL . "/database");
     }

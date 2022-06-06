@@ -41,7 +41,6 @@ document.addEventListener("click", () => {
 const dropdownToggle = document.getElementsByClassName("js--dropdown-toggle");
 for (const dropdown of dropdownToggle) {
   dropdown.addEventListener("click", (e) => {
-    console.log(e.target);
     closeAllDropdown();
 
     const dropdownItem = dropdown.querySelector(".js--dropdown-item");
@@ -50,3 +49,22 @@ for (const dropdown of dropdownToggle) {
     e.stopPropagation();
   });
 }
+
+// Table Column Show Filter
+const toggleFilterTable = (toggleColumn, column) => {
+  const columnToggle = document.querySelector(toggleColumn);
+
+  columnToggle.addEventListener("change", ({ target }) => {
+    const columns = document.querySelectorAll(column);
+    for (const column of columns) {
+      target.checked ? column.classList.remove("hidden") : column.classList.add("hidden");
+      if (column.classList.contains("hidden")) columnToggle.checked = false;
+    }
+  });
+};
+
+toggleFilterTable("#emailColumnToggle", ".js--emailColumn");
+toggleFilterTable("#teleponColumnToggle", ".js--teleponColumn");
+toggleFilterTable("#alamatColumnToggle", ".js--alamatColumn");
+toggleFilterTable("#jenisKelaminColumnToggle", ".js--jenisKelaminColumn");
+toggleFilterTable("#tanggalLahirColumnToggle", ".js--tanggalLahirColumn");

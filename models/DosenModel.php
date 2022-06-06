@@ -38,20 +38,25 @@ class DosenModel extends Database {
     
     public function store($data)
     {
-        $nama = $data["nama"];
-        $nidn = $data["nidn"];
-        $tanggalLahir = $data["tanggalLahir"];
-        $email = $data["email"];
-        $telepon = $data["telepon"];
-        $jenisKelamin = $data["jenisKelamin"];
-        $alamat = $data["alamat"];
+        $post = $data["post"]; // from $_POST
+        $files = $data["files"]; // from $_FILES
+
+        $nama = $post["nama"];
+        $nidn = $post["nidn"];
+        $tanggalLahir = $post["tanggalLahir"];
+        $email = $post["email"];
+        $telepon = $post["telepon"];
+        $jenisKelamin = $post["jenisKelamin"];
+        $alamat = $post["alamat"];
+        $photo = $this->uploadFiles($files);
 
         $this->query("INSERT INTO dosen
-                     (nidn, nama, tanggal_lahir, email, telepon, jenis_kelamin, alamat)
-                      VALUES (:nidn, :nama, :tanggalLahir, :email, :telepon, :jenisKelamin, :alamat)");
+                     (nidn, nama, photo, tanggal_lahir, email, telepon, jenis_kelamin, alamat)
+                      VALUES (:nidn, :nama, :photo, :tanggalLahir, :email, :telepon, :jenisKelamin, :alamat)");
                         
         $this->bind(":nidn", $nidn, PDO::PARAM_STR);
         $this->bind(":nama", $nama, PDO::PARAM_STR);
+        $this->bind(":photo", $photo, PDO::PARAM_STR);
         $this->bind(":tanggalLahir", $tanggalLahir, PDO::PARAM_STR);
         $this->bind(":email", $email, PDO::PARAM_STR);
         $this->bind(":telepon", $telepon, PDO::PARAM_STR);
@@ -63,18 +68,26 @@ class DosenModel extends Database {
 
     public function update($data)
     {
-        $id = $data["id"];
-        $nama = $data["nama"];
-        $nidn = $data["nidn"];
-        $tanggalLahir = $data["tanggalLahir"];
-        $email = $data["email"];
-        $telepon = $data["telepon"];
-        $jenisKelamin = $data["jenisKelamin"];
-        $alamat = $data["alamat"];
+        $post = $data["post"];
+        $files = $data["files"];
+
+        $id = $post["id"];
+        $nama = $post["nama"];
+        $nidn = $post["nidn"];
+        $tanggalLahir = $post["tanggalLahir"];
+        $email = $post["email"];
+        $telepon = $post["telepon"];
+        $jenisKelamin = $post["jenisKelamin"];
+        $alamat = $post["alamat"];
+        $oldPhoto = $post["oldPhoto"];
+        $photo = $this->uploadFiles($files);
+
+        if(!$photo) $photo = $oldPhoto;
 
         $this->query("UPDATE dosen
                      SET nidn=:nidn,
                          nama=:nama, 
+                         photo=:photo,
                          tanggal_lahir=:tanggalLahir, 
                          email=:email, 
                          telepon=:telepon, 
@@ -85,6 +98,7 @@ class DosenModel extends Database {
         $this->bind(":id", $id, PDO::PARAM_STR);
         $this->bind(":nidn", $nidn, PDO::PARAM_STR);
         $this->bind(":nama", $nama, PDO::PARAM_STR);
+        $this->bind(":photo", $photo, PDO::PARAM_STR);
         $this->bind(":tanggalLahir", $tanggalLahir, PDO::PARAM_STR);
         $this->bind(":email", $email, PDO::PARAM_STR);
         $this->bind(":telepon", $telepon, PDO::PARAM_STR);

@@ -10,8 +10,12 @@ $mahasiswa = $data["mahasiswa"];
             <th>No</th>
             <th>Nama</th>
             <th>NIM</th>
-            <th>kelas</th>
-            <th>Telepon</th>
+            <th>Kelas</th>
+            <th class="js--teleponColumn">Telepon</th>
+            <th class="js--emailColumn hidden">Email</th>
+            <th class="js--alamatColumn hidden">Alamat</th>
+            <th class="js--jenisKelaminColumn hidden">Jenis Kelamin</th>
+            <th class="js--tanggalLahirColumn hidden">Tanggal Lahir</th>
         </tr>
     </thead>
     <tbody id="mainTableContainer" class="table-container table-color-range text-sm">
@@ -22,7 +26,11 @@ $mahasiswa = $data["mahasiswa"];
             <td><?= $mhs["nama"] ?></td>
             <td><?= $mhs["nim"] ?></td>
             <td><?= $mhs["kelas"] ?></td>
-            <td><?= $mhs["telepon"] ?></td>
+            <td class="js--teleponColumn"><?= $mhs["telepon"] ?></td>
+            <td class="js--emailColumn hidden"><?= $mhs["email"] ?></td>
+            <td class="js--alamatColumn hidden"><?= $mhs["alamat"] ?></td>
+            <td class="js--jenisKelaminColumn hidden"><?= $mhs["jenis_kelamin"] ?></td>
+            <td class="js--tanggalLahirColumn hidden"><?= $mhs["tanggal_lahir"] ?></td>
         </tr>
         <?php endforeach ?>
     </tbody>

@@ -69,6 +69,10 @@
   ::-webkit-scrollbar-thumb:hover {
     @apply bg-gray-500;
   }
+
+  .form-error-text {
+    @apply text-red-500 font-medium;
+  }
 }
 
 @layer components {
@@ -111,6 +115,10 @@
 
   .navbar-active {
     @apply border-l-4 border-primary text-primary;
+  }
+
+  .js--dropdown-item {
+    @apply z-10;
   }
 }
 
