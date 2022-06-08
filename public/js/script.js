@@ -54,13 +54,14 @@ for (const dropdown of dropdownToggle) {
 const toggleFilterTable = (toggleColumn, column) => {
   const columnToggle = document.querySelector(toggleColumn);
 
-  columnToggle.addEventListener("change", ({ target }) => {
-    const columns = document.querySelectorAll(column);
-    for (const column of columns) {
-      target.checked ? column.classList.remove("hidden") : column.classList.add("hidden");
-      if (column.classList.contains("hidden")) columnToggle.checked = false;
-    }
-  });
+  if (columnToggle) {
+    columnToggle.addEventListener("change", ({ target }) => {
+      const columns = document.querySelectorAll(column);
+      for (const column of columns) {
+        target.checked ? column.classList.remove("hidden") : column.classList.add("hidden");
+      }
+    });
+  }
 };
 
 toggleFilterTable("#emailColumnToggle", ".js--emailColumn");

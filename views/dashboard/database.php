@@ -1,15 +1,20 @@
+<?php 
+use Core\Flasher;
+
+?>
+
 <!-- Main Section -->
-<main class="py-5 px-6 flex flex-col flex-1 h-screen">
+<main class="py-5 px-6 flex flex-col flex-1 h-screen overflow-auto">
     <!-- Main Section Header -->
     <header class="space-y-6">
         <!-- Header Searchbar -->
         <div class="relative">
-        <label class="absolute left-3 top-1/2 -translate-y-1/2" for="search">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-            </svg>
-        </label>
-        <input class="w-64 py-2 pl-10 pr-5 rounded-lg text-sm outline-none border-gray-200 focus:border-primary focus:ring focus:ring-primary focus:ring-opacity-20 bg-gray-50" type="text" id="search" name="search" placeholder="Nama, NIM, kelas, telepon..." data-table="mahasiswa" />
+            <label class="absolute left-3 top-1/2 -translate-y-1/2" for="search">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                </svg>
+            </label>
+            <input class="w-64 py-2 pl-10 pr-5 rounded-lg text-sm outline-none border-gray-200 focus:border-primary focus:ring focus:ring-primary focus:ring-opacity-20 bg-gray-50" type="text" id="search" name="search" placeholder="Nama, NIM, kelas, telepon..." data-table="mahasiswa" />
         </div>
 
         <div class="flex justify-between">
@@ -18,25 +23,11 @@
 
         <!-- Header buttons -->
         <div class="flex space-x-5">
-            <button class="btn btn-ternary text-sm">
-            <span>Urutkan</span>
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" />
-            </svg>
-            </button>
-
-            <button class="btn btn-ternary text-sm relative">
-            <span>Filter</span>
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z" />
-            </svg>
-            </button>
-            
             <!-- Dropdown Button -->
             <div class="relative js--dropdown-toggle">
                 <button class="btn btn-primary text-sm">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
                     </svg>
                     <span>Tambah</span>
                 </button>
@@ -65,6 +56,9 @@
     </header>
 
     <section class="mt-8 overflow-hidden flex flex-col flex-1">
+        <div class="mb-5">
+            <?php Flasher::flash() ?>
+        </div>
         <div class="relative">
             <!-- Table Tabs -->
             <div class="text-sm border-b pb-3 text-gray-500">
@@ -79,7 +73,7 @@
                         <path stroke-linecap="round" stroke-linejoin="round" d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z" />
                     </svg>
                 </button>
-                <div class="py-2 px-5 min-w-max absolute right-0 invisible js--dropdown-item bg-white shadow-lg text-xs space-y-2 rounded-lg">
+                <div class="py-4 px-5 min-w-max absolute right-0 invisible js--dropdown-item bg-white custom-shadow-sm text-xs space-y-2 rounded-lg">
                     <label for="emailColumnToggle" class="flex items-center space-x-3">
                         <input type="checkbox" id="emailColumnToggle">
                         <span>Email</span>
@@ -104,7 +98,7 @@
             </div>
         </div>
 
-        <div class="mt-5 basis-full h-full overflow-hidden overflow-y-auto">
+        <div class="mt-5 basis-full h-full overflow-auto">
             <table id="tableContainer" class="w-full text-left table-auto max-h-4 relative">
                 <thead id="headerTableContainer" class="table-container text-sm">
                     <tr>
@@ -131,7 +125,7 @@
     </section>
 </main>
 
-<!-- Form Mahasiswa -->
+<!-- Form Mahasiswa / Dosen -->
 <div id="dialogBackdrop" class="z-50 flex justify-center items-center absolute inset-0 bg-gray-900/50 overflow-y-scroll invisible <?= $isFlasherTrue ? "js--force-open" : "" ?>" data-table="<?= $_SESSION["flash"]["type"] ?>">
     <svg role="status" class="inline w-10 h-10 mr-2 text-gray-200 animate-spin fill-primary" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="currentColor"/>

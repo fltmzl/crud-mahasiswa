@@ -17,21 +17,27 @@ class Login extends Controller {
     {
         $username = $_POST["username"];
         $password = $_POST["password"];
+        $remember = $_POST["remember"] ?? false;
 
         $result = $this->model("UserModel")->auth($username, $password);
         
         if($result) {
-            $string = $result["username"] . " " . $result["role"];
+            $string = $result["username"] . " " . $result["role"] . " " . $result["photo"]; 
             $encodedString = base64_encode($string);
+
+            if($remember) setcookie("school", $encodedString, time() + (24*60*60), "/");
 
             $_SESSION["user"] = [
                 "username" => $result["username"],
-                "role" => $result["role"]
+                "role" => $result["role"],
+                "photo" => $result["photo"]
             ];
 
             header("location: " . APP_URL);
+            exit;
         }
         
-        echo "LOGIN GAGAL";
+        Flasher::setFlash("Username atau Password salah.", "Login gagal", "error");
+        header("location: " . APP_URL . "/login");
     }
 }

@@ -5,22 +5,21 @@ namespace Controllers;
 use Core\Controller;
 
 class Ajax extends Controller {
-    public function showTableMahasiswa()
+    public function showTableMahasiswa($order, $sort)
     {
-
         $this->view("ajax/tableMahasiswa", [
-            "mahasiswa" => $this->model("MahasiswaModel")->getAll(),
+            "mahasiswa" => $this->model("MahasiswaModel")->getAll($order, $sort),
         ]);
     }
 
-    public function showTableDosen()
+    public function showTableDosen($order, $sort)
     {
         $this->view("ajax/tableDosen", [
-            "dosen" => $this->model("DosenModel")->getAll(),
+            "dosen" => $this->model("DosenModel")->getAll($order, $sort),
         ]);
     }
 
-    public function profileDetail($table, $id)
+    public function profileDetail($table, $id, $actionHidden = false)
     {
         $table = ucwords($table);
         $data = $this->model($table . "Model")->getOne($id);
@@ -29,6 +28,7 @@ class Ajax extends Controller {
 
         $this->view("ajax/detailProfile",[
             "data" => $data,
+            "actionHidden" => $actionHidden
         ]);
     }
 

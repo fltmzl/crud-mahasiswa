@@ -74,7 +74,11 @@ class Database {
 
     public function execute()
     {
-        $this->stmt->execute();
+        try {
+            $this->stmt->execute();
+        } catch (PDOException $e) {
+            return $e->getCode();
+        }
     }
 
     public function resultOne()
@@ -92,7 +96,7 @@ class Database {
     public function rows()
     {
         $this->execute();
-
+        
         if($this->stmt->rowCount()) {
             return $this->stmt->rowCount();
         }

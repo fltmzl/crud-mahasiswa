@@ -7,9 +7,9 @@ use Core\Flasher;
 use PDO;
 
 class MahasiswaModel extends Database {
-    public function getAll()
+    public function getAll($order = "nama", $sort = "asc")
     {
-        $this->query("SELECT * FROM mahasiswa ORDER BY nama");
+        $this->query("SELECT * FROM mahasiswa ORDER BY $order $sort");
         return $this->resultAll();
     }
 

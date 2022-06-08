@@ -6,9 +6,9 @@ use \Core\Database;
 use PDO;
 
 class DosenModel extends Database {
-    public function getAll()
+    public function getAll($order = "nama", $sort = "asc")
     {
-        $this->query("SELECT * FROM dosen ORDER BY nama");
+        $this->query("SELECT * FROM dosen ORDER BY $order $sort");
         return $this->resultAll();
     }
 

@@ -1,8 +1,13 @@
 const HOSTNAME = window.location.hostname;
+const PATHNAME = window.location.pathname;
 const APP_URL = `http://${HOSTNAME}/uas-pemrograman-web/public`;
 
 const tableContainer = document.getElementById("tableContainer");
 const searchbar = document.getElementById("search");
+
+// hide action button in Dashboard
+const currentUrl = `${HOSTNAME}${PATHNAME}`;
+const dashboardUrl = `${HOSTNAME}/uas-pemrograman-web/public/`;
 
 const capitalizeFirstLetter = (string) => {
   return string.charAt(0).toUpperCase() + string.slice(1);
@@ -43,36 +48,39 @@ const dosenTabButton = document.getElementById("dosenTabButton");
 window.addEventListener("load", () => {
   if (mahasiswaTabButton) mahasiswaTabButton.classList.add("database-tab-active");
 
+  const order = "nama";
+  const sort = "asc";
+
   const ajax = new Ajax(tableContainer);
-  ajax.open("GET", `${APP_URL}/ajax/showTableMahasiswa`);
+  ajax.open("GET", `${APP_URL}/ajax/showTableMahasiswa/${order}/${sort}`);
   ajax.send();
 });
 
 // Tampikan data Dosen
-if (dosenTabButton) {
-  dosenTabButton.addEventListener("click", () => {
-    mahasiswaTabButton.classList.remove("database-tab-active");
-    dosenTabButton.classList.add("database-tab-active");
-    searchbar.dataset.table = "dosen";
+const showDataDosen = (order = "nama", sort = "asc") => {
+  mahasiswaTabButton.classList.remove("database-tab-active");
+  dosenTabButton.classList.add("database-tab-active");
+  searchbar.dataset.table = "dosen";
 
-    const ajax = new Ajax(tableContainer);
-    ajax.open("GET", `${APP_URL}/ajax/showTableDosen`);
-    ajax.send();
-  });
-}
+  const ajax = new Ajax(tableContainer);
+  ajax.open("GET", `${APP_URL}/ajax/showTableDosen/${order}/${sort}`);
+  ajax.send();
+};
+
+dosenTabButton?.addEventListener("click", () => showDataDosen());
 
 // Tampikan data Mahasiswa
-if (mahasiswaTabButton) {
-  mahasiswaTabButton.addEventListener("click", () => {
-    mahasiswaTabButton.classList.add("database-tab-active");
-    dosenTabButton.classList.remove("database-tab-active");
-    searchbar.dataset.table = "mahasiswa";
+const showDataMahasiswa = (order = "nama", sort = "asc") => {
+  mahasiswaTabButton.classList.add("database-tab-active");
+  dosenTabButton.classList.remove("database-tab-active");
+  searchbar.dataset.table = "mahasiswa";
 
-    const ajax = new Ajax(tableContainer);
-    ajax.open("GET", `${APP_URL}/ajax/showTableMahasiswa`);
-    ajax.send();
-  });
-}
+  const ajax = new Ajax(tableContainer);
+  ajax.open("GET", `${APP_URL}/ajax/showTableMahasiswa/${order}/${sort}`);
+  ajax.send();
+};
+
+mahasiswaTabButton?.addEventListener("click", () => showDataMahasiswa());
 
 // Detail Profile Mahasiswa & Dosen
 const profileDetailContainer = document.getElementById("profileDetailContainer");
@@ -86,28 +94,31 @@ const detailProfile = ({ dataset }) => {
   </svg>`;
 
   const ajax = new Ajax(profileDetailContainer, loadingElement);
-  ajax.open("GET", `${APP_URL}/ajax/profileDetail/${table}/${id}`);
+  if (currentUrl === dashboardUrl) {
+    // hide action button in Dashboard
+    ajax.open("GET", `${APP_URL}/ajax/profileDetail/${table}/${id}/true`);
+  } else {
+    ajax.open("GET", `${APP_URL}/ajax/profileDetail/${table}/${id}`);
+  }
   ajax.send();
 };
 
 // Cari Data Mahasiswa & Dosen
-if (searchbar) {
-  searchbar.addEventListener("input", () => {
-    let keyword = searchbar.value;
-    let table = searchbar.dataset.table;
+searchbar?.addEventListener("input", () => {
+  let keyword = searchbar.value;
+  let table = searchbar.dataset.table;
 
-    const ajax = new Ajax(tableContainer);
+  const ajax = new Ajax(tableContainer);
 
-    if (keyword) {
-      ajax.open("POST", `${APP_URL}/ajax/search`);
-      ajax.contentType("application/x-www-form-urlencoded");
-      ajax.send(`table=${table}&keyword=${keyword}`);
-    } else {
-      ajax.open("GET", `${APP_URL}/ajax/showTable${capitalizeFirstLetter(table)}`);
-      ajax.send();
-    }
-  });
-}
+  if (keyword) {
+    ajax.open("POST", `${APP_URL}/ajax/search`);
+    ajax.contentType("application/x-www-form-urlencoded");
+    ajax.send(`table=${table}&keyword=${keyword}`);
+  } else {
+    ajax.open("GET", `${APP_URL}/ajax/showTable${capitalizeFirstLetter(table)}`);
+    ajax.send();
+  }
+});
 
 // Tampilkan Form Tambah Mahasiswa
 const btnAddMahasiswa = document.getElementById("btnAddMahasiswa");
@@ -120,8 +131,7 @@ const addMahasiswa = () => {
   ajax.open("GET", `${APP_URL}/database/create/mahasiswa`);
   ajax.send();
 };
-
-if (btnAddMahasiswa) btnAddMahasiswa.addEventListener("click", addMahasiswa);
+btnAddMahasiswa?.addEventListener("click", addMahasiswa);
 
 // Tampilkan Form Tambah Dosen
 const btnAddDosen = document.getElementById("btnAddDosen");
@@ -133,11 +143,22 @@ const addDosen = () => {
   ajax.open("GET", `${APP_URL}/database/create/dosen`);
   ajax.send();
 };
+btnAddDosen?.addEventListener("click", addDosen);
 
-if (btnAddDosen) btnAddDosen.addEventListener("click", addDosen);
+// Tampilkan Form Tambah Attendance
+const btnAddAttendance = document.getElementById("btnAddAttendance");
+
+const addAttendance = () => {
+  dialogBackdrop.classList.remove("invisible");
+
+  const ajax = new Ajax(dialogBackdrop);
+  ajax.open("GET", `${APP_URL}/attendance/create`);
+  ajax.send();
+};
+btnAddAttendance?.addEventListener("click", addAttendance);
 
 // Tampilkan form Mahasiswa / Dosen saat ada Validasi Error
-if (dialogBackdrop.classList.contains("js--force-open")) {
+if (dialogBackdrop?.classList.contains("js--force-open")) {
   if (dialogBackdrop.dataset.table === "mahasiswa") addMahasiswa();
   if (dialogBackdrop.dataset.table === "dosen") addDosen();
 }

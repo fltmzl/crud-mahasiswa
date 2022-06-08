@@ -2,6 +2,7 @@
 namespace Controllers;
 
 use Core\Controller;
+use Core\Flasher;
 
 class Database extends Controller {
     public function index()
@@ -31,6 +32,12 @@ class Database extends Controller {
         $table = ucwords($table);
         $result = $this->model($table . "Model")->store($data);
         
+        if($result) {
+            Flasher::setFlash("Berhasil", "menambahkan data", "success");
+        } else {
+            Flasher::setFlash("Gagal", "menambahkan data, mungkin ada duplikasi data", "error");
+        } 
+        
         header("location: ". APP_URL . "/database");
     }
     
@@ -38,6 +45,12 @@ class Database extends Controller {
     {
         $table = ucwords($table);
         $result = $this->model($table . "Model")->delete($id);
+
+        if($result) {
+            Flasher::setFlash("Berhasil", "menghapus data", "success");
+        } else {
+            Flasher::setFlash("Gagal", "menghapus data", "error");
+        } 
         
         header("location: " . APP_URL . "/database");
     }
@@ -62,6 +75,12 @@ class Database extends Controller {
 
         $table = ucwords($table);
         $result = $this->model($table . "Model")->update($data);
+
+        if($result) {
+            Flasher::setFlash("Berhasil", "mengedit data", "success");
+        } else {
+            Flasher::setFlash("Gagal", "mengedit data, mungkin ada duplikasi data", "error");
+        } 
         
         header("location: " . APP_URL . "/database");
     }

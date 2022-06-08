@@ -8,14 +8,14 @@ $mahasiswa = $data["mahasiswa"];
     <thead id="headerTableContainer" class="table-container text-sm">
         <tr>
             <th>No</th>
-            <th>Nama</th>
-            <th>NIM</th>
-            <th>Kelas</th>
-            <th class="js--teleponColumn">Telepon</th>
-            <th class="js--emailColumn hidden">Email</th>
-            <th class="js--alamatColumn hidden">Alamat</th>
-            <th class="js--jenisKelaminColumn hidden">Jenis Kelamin</th>
-            <th class="js--tanggalLahirColumn hidden">Tanggal Lahir</th>
+            <th onclick="showDataMahasiswa('nama', 'asc')">Nama<i class="fa fa-fw fa-sort"></i></th>
+            <th onclick="showDataMahasiswa('nim', 'asc')">NIM<i class="fa fa-fw fa-sort"></i></th>
+            <th onclick="showDataMahasiswa('kelas', 'asc')">Kelas<i class="fa fa-fw fa-sort"></i></th>
+            <th onclick="showDataMahasiswa('telepon', 'asc')" class="js--teleponColumn">Telepon<i class="fa fa-fw fa-sort"></i></th>
+            <th onclick="showDataMahasiswa('email', 'asc')" class="js--emailColumn hidden">Email<i class="fa fa-fw fa-sort"></i></th>
+            <th onclick="showDataMahasiswa('alamat', 'asc')" class="js--alamatColumn hidden">Alamat<i class="fa fa-fw fa-sort"></i></th>
+            <th onclick="showDataMahasiswa('jenis_kelamin', 'asc')" class="js--jenisKelaminColumn hidden">Jenis Kelamin<i class="fa fa-fw fa-sort"></i></th>
+            <th onclick="showDataMahasiswa('tanggal_lahir', 'asc')" class="js--tanggalLahirColumn hidden">Tanggal Lahir<i class="fa fa-fw fa-sort"></i></th>
         </tr>
     </thead>
     <tbody id="mainTableContainer" class="table-container table-color-range text-sm">

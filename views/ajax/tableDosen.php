@@ -8,13 +8,13 @@ $dosen = $data["dosen"];
     <thead id="headerTableContainer" class="table-container text-sm">
         <tr>
             <th>No</th>
-            <th>Nama</th>
-            <th>NIDN</th>
-            <th class="js--teleponColumn">Telepon</th>
-            <th class="js--emailColumn hidden">Email</th>
-            <th class="js--alamatColumn hidden">Alamat</th>
-            <th class="js--jenisKelaminColumn hidden">Jenis Kelamin</th>
-            <th class="js--tanggalLahirColumn hidden">Tanggal Lahir</th>
+            <th onclick="showDataDosen('nama', 'asc')">Nama<i class="fa fa-fw fa-sort"></i></th>
+            <th onclick="showDataDosen('nidn', 'asc')">NIDN<i class="fa fa-fw fa-sort"></i></th>
+            <th onclick="showDataDosen('telepon', 'asc')" class="js--teleponColumn">Telepon<i class="fa fa-fw fa-sort"></i></th>
+            <th onclick="showDataDosen('email', 'asc')" class="js--emailColumn hidden">Email<i class="fa fa-fw fa-sort"></i></th>
+            <th onclick="showDataDosen('alamat', 'asc')" class="js--alamatColumn hidden">Alamat<i class="fa fa-fw fa-sort"></i></th>
+            <th onclick="showDataDosen('jenis_kelamin', 'asc')" class="js--jenisKelaminColumn hidden">Jenis Kelamin<i class="fa fa-fw fa-sort"></i></th>
+            <th onclick="showDataDosen('tanggal_lahir', 'asc')" class="js--tanggalLahirColumn hidden">Tanggal Lahir<i class="fa fa-fw fa-sort"></i></th>
         </tr>
     </thead>
     <tbody id="mainTableContainer" class="table-container table-color-range text-sm">

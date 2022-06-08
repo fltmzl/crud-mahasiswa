@@ -1,4 +1,5 @@
 <?php 
+$actionHidden = $data["actionHidden"];
 
 $data = $data["data"];
 
@@ -6,12 +7,19 @@ $photoSrc = $data["photo"] ?? "pp.jpg";
 $telepon = $data["telepon"];
 $email = $data["email"];
 
+function getAge($birthDate) {    
+    $currentDate = date("Y-m-d");
+    $age = date_diff(date_create($birthDate), date_create($currentDate));
+    return $age->format("%y");
+}
+
 ?>
 
 <div class="space-y-10 self-start mt-5">
     <section class="w-full text-center space-y-3 relative">
+        <?php if(!$actionHidden) : ?>
         <!-- Action Button -->
-        <div class="right-2 absolute flex flex-col space-y-3">
+        <div id="actionBtnContainer" class="right-2 absolute flex flex-col space-y-3">
             <?php $id = $data["nim"] ?? $data["nidn"] ?>
 
             <!-- Edit Button -->
@@ -28,6 +36,7 @@ $email = $data["email"];
                 </svg>
             </a>
         </div>
+        <?php endif; ?>
 
         <!-- Profile Picture -->
         <div class="w-20 aspect-square rounded-full overflow-hidden bg-green-100 mx-auto">
@@ -87,7 +96,7 @@ $email = $data["email"];
         </div>
         <div class="space-y-2">
             <h5>Umur</h5>
-            <?php $age = $data["tanggal_lahir"] ?>
+            <?php $age = getAge($data["tanggal_lahir"]) ?>
             <h6><?=$age ?></h6>
         </div>
         <div class="space-y-2">
